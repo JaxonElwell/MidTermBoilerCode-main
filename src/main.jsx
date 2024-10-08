@@ -6,7 +6,7 @@ import LoginPage from './LoginPage';
 import LandingPage from './LandingPage';
 import QuizPage from './QuizPage';
 import WelcomePage from './WelcomePage';
-import './index.css'; // Optional for styling
+import './styles.css'; // Optional for styling
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>

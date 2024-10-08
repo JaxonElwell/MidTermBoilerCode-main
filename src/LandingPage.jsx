@@ -1,5 +1,6 @@
 
 import { useNavigate } from 'react-router-dom';
+import './styles.css'; // Optional for styling
 const LandingPage = () => {
 
   const navigate = useNavigate();
@@ -9,7 +10,7 @@ const LandingPage = () => {
   };
  
     return (
-      <div>
+      <div className="center-container">
         <h1>You have landed</h1>
         <p>Welcome Potential Hackers</p>
         <button onClick={goToQuizPage}>Go to Quiz Page</button>
