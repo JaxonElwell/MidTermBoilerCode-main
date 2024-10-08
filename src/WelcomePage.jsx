@@ -1,3 +1,14 @@
+/*
+  Welcome page
+  - this page is displayed after the user has successfully logged in
+  - the user is required to enter their username, email, first name, and last name
+  - the user can send their information to the admin by clicking the "Send Information" button
+  - the user can navigate back to the home page by clicking the "HOME" button
+
+  note
+  - i didn't have enough time to signup for an emailJS or twilio account to send the emai
+    so i used the mailto link to send the email. With more time i would implement emailJS or twilio
+*/
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './styles.css'; // Optional for styling

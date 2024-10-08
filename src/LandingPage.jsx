@@ -1,4 +1,8 @@
 
+/*
+  Landing page
+    - the first page that the user sees when they visit the website.
+*/
 import { useNavigate } from 'react-router-dom';
 import './styles.css'; // Optional for styling
 const LandingPage = () => {
@@ -19,5 +23,3 @@ const LandingPage = () => {
   };
   
   export default LandingPage;
-  
-  

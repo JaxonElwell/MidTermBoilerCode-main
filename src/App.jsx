@@ -1,3 +1,8 @@
+/*
+  App
+    - welcome page
+    - i am not sure what our company name is so i am leaving it ambiguous.
+*/
 import { useNavigate } from 'react-router-dom';
 import './styles.css'; // Optional for styling
 
@@ -10,9 +15,14 @@ const App = () => {
 
   return (
     <div className="center-container">
-      <h1>Home Page</h1>
-      <p>Welcome to the homepage!</p>
-      <button onClick={goToLoginPage}>Go to Login Page</button>
+      <header class="masthead">
+            <div class="container">
+                <div class="masthead-subheading">Welcome To Our Company!</div>
+                <div class="masthead-heading text-uppercase">It's Nice To Meet You</div>
+                <button onClick={goToLoginPage}>Go to Login Page</button>
+            </div>
+        </header>
+      
     </div>
   );
 };

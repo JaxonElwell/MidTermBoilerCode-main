@@ -1,3 +1,9 @@
+/*
+  Quiz page
+    - all questions must be answered correctly to proceed
+    - key: True, False, True
+*/
+
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './styles.css'; // Optional for styling
@@ -7,26 +13,39 @@ const QuizPage = () => {
   const [answer1, setAnswer1] = useState(null);
   const [answer2, setAnswer2] = useState(null);
   const [answer3, setAnswer3] = useState(null);
-  const [isButtonDisabled, setIsButtonDisabled] = useState(true);
+  const [showPopup, setShowPopup] = useState(false);
 
+  // correct answers
   const correctAnswers = {
     answer1: true,
     answer2: false,
-    answer3: false,
+    answer3: true,
   };
 
-  const handleInputChange = () => {
+  // check if all answers are correct
+  const handleInputChange = (answer, value) => {
+    if (answer === 'answer1') setAnswer1(value);
+    if (answer === 'answer2') setAnswer2(value);
+    if (answer === 'answer3') setAnswer3(value);
+  };
+
+  const checkAnswers = () => {
     const isCorrect = 
       answer1 === correctAnswers.answer1 && 
       answer2 === correctAnswers.answer2 && 
       answer3 === correctAnswers.answer3;
-    setIsButtonDisabled(!isCorrect);
+    if (isCorrect) {
+      navigate('/welcome'); // Navigate to the welcome page
+    } else {
+      setShowPopup(true);
+    }
   };
 
-  const goToWelcomePage = () => {
-    navigate('/welcome'); // Navigate to the welcome page
+  const closePopup = () => {
+    setShowPopup(false);
   };
 
+  // render the quiz page
   return (
     <div className="center-container">
       <h1>Quiz Page</h1>
@@ -35,19 +54,13 @@ const QuizPage = () => {
         <label>Question 1: Routing can be handled via react-router-dom</label>
         <div>
           <button
-            onClick={() => {
-              setAnswer1(true);
-              handleInputChange();
-            }}
+            onClick={() => handleInputChange('answer1', true)}
             style={{ backgroundColor: answer1 === true ? 'green' : 'initial' }}
           >
             True
           </button>
           <button
-            onClick={() => {
-              setAnswer1(false);
-              handleInputChange();
-            }}
+            onClick={() => handleInputChange('answer1', false)}
             style={{ backgroundColor: answer1 === false ? 'red' : 'initial' }}
           >
             False
@@ -58,19 +71,13 @@ const QuizPage = () => {
         <label>Question 2: Bootstrap and Tailwind are different names for the same thing</label>
         <div>
           <button
-            onClick={() => {
-              setAnswer2(true);
-              handleInputChange();
-            }}
+            onClick={() => handleInputChange('answer2', true)}
             style={{ backgroundColor: answer2 === true ? 'green' : 'initial' }}
           >
             True
           </button>
           <button
-            onClick={() => {
-              setAnswer2(false);
-              handleInputChange();
-            }}
+            onClick={() => handleInputChange('answer2', false)}
             style={{ backgroundColor: answer2 === false ? 'red' : 'initial' }}
           >
             False
@@ -81,19 +88,13 @@ const QuizPage = () => {
         <label>Question 3: A button can only be created through a style sheet</label>
         <div>
           <button
-            onClick={() => {
-              setAnswer3(true);
-              handleInputChange();
-            }}
+            onClick={() => handleInputChange('answer3', true)}
             style={{ backgroundColor: answer3 === true ? 'green' : 'initial' }}
           >
             True
           </button>
           <button
-            onClick={() => {
-              setAnswer3(false);
-              handleInputChange();
-            }}
+            onClick={() => handleInputChange('answer3', false)}
             style={{ backgroundColor: answer3 === false ? 'red' : 'initial' }}
           >
             False
@@ -101,9 +102,15 @@ const QuizPage = () => {
         </div>
       </div>
       <br />
-      <button onClick={goToWelcomePage} disabled={isButtonDisabled}>
+      <button onClick={checkAnswers}>
         Submit Quiz
       </button>
+      {showPopup && (
+        <div className="popup">
+          <p>Wrong answer, please try again.</p>
+          <button onClick={closePopup}>Close</button>
+        </div>
+      )}
     </div>
   );
 };
